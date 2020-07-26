@@ -6,12 +6,11 @@ description 'hola mundo'
 version '1.0.0'
 
 -- What to run
-client_script 'cliente.lua'
+client_scripts {'cliente.lua','asd.lua'}
 
 ui_page 'main.html'
 
 files {
     'main.html',
-    'navega.js',
-    'style.css'
+    'navega.js'
 }

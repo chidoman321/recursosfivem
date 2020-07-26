@@ -1,3 +1,5 @@
+
+--asociar  un nombre con un modelo/regresa id del target
 function CreateNamedRenderTargetForModel(name, model)
 	local handle = 0
 	if not IsNamedRendertargetRegistered(name) then
@@ -12,15 +14,19 @@ function CreateNamedRenderTargetForModel(name, model)
 
 	return handle
 end
-
+--obtener dimensiones
 local scale = 1.5
 local screenWidth = math.floor(1280 / scale)
 local screenHeight = math.floor(720 / scale)
 
 local model = GetHashKey('xm_prop_x17dlc_monitor_wall_01a')
+--obtener el id del target
 local handle = CreateNamedRenderTargetForModel('prop_x17dlc_monitor_wall_01a', model)
+--crear un diccionario de texturas en tiempo de ejecucion
 local txd = CreateRuntimeTxd('meows')
+--crear el dui
 d = CreateDui('https://www.youtube.com/watch?v=9cBtJYI6itg',screenWidth,screenHeight)
+--hacer una textura en el diccionaria recien creado , y tiene relacion con el dui
 local a = CreateRuntimeTextureFromDuiHandle(txd,'asd',GetDuiHandle(d))
 local screenAngle = GetEntityHeading(PlayerPedId())
 local coords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 15.0, 0.0)
@@ -53,7 +59,7 @@ Citizen.CreateThread(function()
             -- Draw black|off texture
             DrawRect(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 255)
     
-            -- Draw the dui and mouse
+            -- Draw the dui 
     
                 BlockWeaponWheelThisFrame()
                 SetCurrentPedWeapon(PlayerPedId(), unarmed, 1)
@@ -70,7 +76,7 @@ Citizen.CreateThread(function()
     end
 end)
     
-
+--destruir el dui
 AddEventHandler('onResourceStop', function(name)
     if name == GetCurrentResourceName() then
         DestroyDui(d)

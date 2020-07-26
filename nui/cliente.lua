@@ -1,40 +1,30 @@
-RegisterNUICallback('datos', function(data, cb)
-    -- POST data gets parsed as JSON automatically
-print(data.nom .. data.ap)
-SetNuiFocus(false,false)
-    -- and so does callback response data
-    cb({ok = true})
-end)
-
-a,b = true,true
+--[[To prevent requests from stalling, you have to return the callback at all times 
+- even if containing just an empty object, or {"ok":true}, or similar.
+]]--
 
 
 Citizen.CreateThread(function() 
-    while true do
 
-       if IsControlJustPressed(1, 36) then 
+while true do
+
+    if IsControlJustPressed(1, 36) then --control izq
+
         SendNUIMessage({
-            type = 'open'
+
+            estado='abrir'
         })
-        if a then
-            
-            SetNuiFocus(a,b)
-            a,b = not a,not a
-        end
-        else
-            SetNuiFocus(a,b)
-            a,b = not a,not a
-        end
+    end 
 
-       
-        Citizen.Wait(0)
-    end
+    if IsControlJustPressed(1, 15) then --control izq
+
+        SendNUIMessage({
+
+            estado='x'
+        })
+    end 
+    Citizen.Wait(30)
+end
+
 
 end)
 
-RegisterNUICallback('off', function(data, cb)
-    -- POST data gets parsed as JSON automatically
-SetNuiFocus(false,false)
-    -- and so does callback response data
-    cb({ok = true})
-end)
