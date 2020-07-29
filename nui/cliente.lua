@@ -2,6 +2,22 @@
 - even if containing just an empty object, or {"ok":true}, or similar.
 ]]--
 
+RegisterNUICallback('close', function(data,cb)
+    SetNuiFocus(false, false)
+    SendNUIMessage({
+
+        estado='close'
+    })
+cb({ok=true})
+end)
+
+RegisterCommand('m', function()
+    SendNUIMessage({
+
+        estado='abrir'
+    })
+    SetNuiFocus(true, true)
+end, false)
 
 Citizen.CreateThread(function() 
 

@@ -13,3 +13,13 @@ window.addEventListener('message',(e) =>{
 
 
 
+function exit(){
+fetch(`https://${GetParentResourceName()}/close`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify({
+        est: 'dato'
+    })
+}).then(resp => resp.json()).then(resp => console.log(resp));}
