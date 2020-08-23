@@ -3,7 +3,7 @@
 ]]--
 
 
-ClearGpsCustomRoute()
+--ClearGpsCustomRoute()
 SetFrontendActive(false)
 Citizen.CreateThread(function() 
 
@@ -37,7 +37,7 @@ while true do
         --añadir el blip p3 es el ancho y p4 es el alto
         local blip = AddBlipForArea(coords.x, coords.y, coords.z, 100.0, 50.0)
         --para que no rote el blip
-        SetBlipRotation(blip, 0)
+        --SetBlipRotation(blip, 0)
         --poner un color al blip
         --0x000000 = blanco  https://runtime.fivem.net/doc/natives/?_0x03D7FB09E75D6B7E
         SetBlipColour(blip, 0x000000)
@@ -62,16 +62,23 @@ while true do
 
         --[[]]
 
-            --poner un punto al gps
             --solo pide coordenadas recuerda que las coordenadas son reales asi que siempre
-            --debes poner el punto decimal seguido de un 0 por defecto AddPointToGpsCustomRoute
+            --debes poner el punto decimal seguido de un 0 por defecto 
             
  --[[
+            --hacer blips
             blip =AddBlipForCoord(200.0, 200.0, 5.0)
             SetBlipColour(blip, 0x000000)
 
-            --agregar el nomre del blip
-            AddTextComponentSubstringBlipName(blip)]]
+            --cambiar el icono
+            SetBlipSprite(blip, 326)
+
+            --indicar que sera un string personalizado
+            BeginTextCommandSetBlipName("STRING")
+            --añadir el string
+            AddTextComponentString("chidoman dev") --string con el nombre del blip
+            --mostrar el nombre
+            EndTextCommandSetBlipName(blip)]]
 
 
             --[[
@@ -87,13 +94,93 @@ while true do
             Citizen.Wait(1000)
             RemoveLoadingPrompt()]]
 
+            --imprimir hello world
+            --[[
+            BeginTextCommandDisplayText('STRING')
+            AddTextComponentSubstringPlayerName('Hello, World!')
+            EndTextCommandDisplayText(0.5, 0.5)--]]
+
             --texto de ayuda arriba en la parte izquierda
+            --[[
             BeginTextCommandDisplayHelp("STRING")
             AddTextComponentSubstringPlayerName("Some text")
+            EndTextCommandDisplayHelp(0, 0, 1, -1)]]
+
+            --imprimir subtitulos
+            --[[
+            BeginTextCommandPrint("STRING")
+            AddTextComponentSubstringPlayerName("asdasd")
+            EndTextCommandPrint(5000, true)]]
+            
+            --notificacion arriba de el mapa
+            --[[
+            BeginTextCommandThefeedPost("STRING")
+            AddTextComponentSubstringPlayerName("ouh sheet")
+            --p0 is important flash,p1 pausemenu pestaña info
+            EndTextCommandThefeedPostTicker(true, true)]]
+
+           --usando labels del juego directorio de los labels usando openiv
+           --GTA V\update\update.rpf\x64\data\lang
+            --[[
+            BeginTextCommandDisplayHelp('GB_ASLT_GO1')
             EndTextCommandDisplayHelp(0, 0, 1, -1)
+            print(EndTextCommandIsMessageDisplayed())]]
+            --agregar place holders
+
+            --usando placeholders ~y~pone el color yellow sobre la siguiente palabra
+            --[[
+            BeginTextCommandDisplayHelp('STRING')
+            --referencia de los placeholders https://pastebin.com/nqNYWMSB
+            AddTextComponentSubstringPlayerName("Go to ~y~ noplace ~b~ asd ~BLIP_TATTOO~ down")
+            EndTextCommandDisplayHelp(0, 0, 1, -1)]]
+
+            --[[
+            -- imprimir premio o rp
+            BeginTextCommandThefeedPost("STRING")
+            AddTextComponentSubstringPlayerName("Asaltante de combis")
+            EndTextCommandThefeedPostAward('CHAR_DEFAULT', 'CHAR_DEFAULT', 200, 0, "FM_GEN_UNLOCK")]]
+         
+
+            --muestra la zona , creoque se refiere a la colonia en la parte inferior derechas
+            --DisplayAreaName(true)
+
+            --muestra el dinero
+            --DisplayCash(true)
+            --para activar o desactivar el hud
+            DisplayHud(true)
+            --quitar el mapa("radar")
+            DisplayRadar(true)
+            
+            --flash al mapa
+            --FlashMinimapDisplay()
+            --flash al mapa con color de hub
+            --FlashMinimapDisplayWithColor("HUD_COLOUR_HB_BLUE")
+
+            --flash de nivel de busqueda
+            --FlashWantedDisplay(true)
+            
+            --mensaje con foto
+            --[[
+            BeginTextCommandThefeedPost("STRING")
+            AddTextComponentSubstringPlayerName("Caile puto , a la salida")
+            EndTextCommandThefeedPostMessagetext("CHAR_DEFAULT","CHAR_DEFAULT",true,3,"whatsapp","el gueson")]]
+            
+            --[[
+            --aumentar los stats
+            BeginTextCommandThefeedPost("PS_UPDATE")
+            EndTextCommandThefeedPostStats("PSF_STAMINA",14,50,25,false,"CHAR_SOCIAL_CLUB","CHAR_SOCIAL_CLUB")]]
+            
+            --hacer ruta
+            --SetNewWaypoint(200.0,200.0)
     end 
-    
-    
+
+    --hacer un menu no funciona muy bien
+   --[[
+    AddTextEntry("FACES_WARNH2", "FUNCIONES HUD")
+    AddTextEntry("QM_NO_0", "llevate la playera oficial")
+    AddTextEntry("QM_NO_3", "o suscribete  a nuestro fatflix")
+    DrawFrontendAlert("FACES_WARNH2", "QM_NO_0", 3, 3, "QM_NO_3", 2, -1, false, "FM_NXT_RAC", "QM_NO_1", true, 10)
+    --]]
     Citizen.Wait(0)
 end
 
